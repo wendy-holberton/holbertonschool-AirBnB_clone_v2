@@ -40,7 +40,7 @@ class DBStorage:
         database = os.environ.get("HBNB_MYSQL_DB")
 
         db_url = (f"mysql+mysqldb://{user}:{password}@{host}/{database}")
-        self.__engine = create_engine(db_url, echo=True, pool_pre_ping=True)
+        self.__engine = create_engine(db_url, pool_pre_ping=True)
 
         if os.getenv("HBNB_ENV") == "test":
             print("test env: dropping all table")
