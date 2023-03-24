@@ -26,9 +26,10 @@ ModelDict = {
 
 class DBStorage:
     """This class manages storage of hbnb models"""
+    __engine = "None"
+    __session = "None"
+
     def __init__(self):
-        self.__engine = "None"
-        self.__session = "None"
 
         # Retrieve the value of the "HBNB_MYSQL_USER" environment variable
         user = os.environ.get("HBNB_MYSQL_USER")
@@ -67,12 +68,15 @@ class DBStorage:
                 dictionary["{}.{}".format(cls, row.id)] = row
 
     def new(self, obj):
+        """Adds object to current database session"""
         self.__session.add(obj)
 
     def save(self):
+        """Commits changes made to current database session"""
         self.__session.commit()
 
     def delete(self, obj=None):
+        """Deletes a specified object from the current database section"""
         if obj:
             self.__session.delete()
         else:
@@ -80,6 +84,7 @@ class DBStorage:
         self.__session.commit()
 
     def reload(self):
+        """Reloads data from the database"""
         if self.__session:
             self.__session.close()
         # Ensure all tables are created in the database
