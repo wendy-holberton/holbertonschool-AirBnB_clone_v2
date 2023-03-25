@@ -49,7 +49,7 @@ class DBStorage:
         # scoped_session to ensure thread_safety when creates a new database
         # session
         self.__session = scoped_session(sessionmaker(bind=self.__engine,
-            expire_on_commit=False))
+        expire_on_commit=False))
 
     def all(self, cls=None):
         dictionary = {}
@@ -92,4 +92,4 @@ class DBStorage:
         # scoped_session to ensure thread_safety when creates a new database
         # session
         self.__session = scoped_session(sessionmaker(bind=self.__engine,
-            expire_on_commit=False))
+        expire_on_commit=False))
