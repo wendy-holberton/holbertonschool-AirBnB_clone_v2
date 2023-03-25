@@ -18,6 +18,14 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
         if kwargs:
+            if '__class__' in kwargs:
+                del kwargs['__class__']
+
+            allow_attr = dir(self)
+            for key in kwargs:
+                if key not in allow_attr:
+                    raise KeyError
+
             if 'updated_at' in kwargs:
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
                                                          '%Y-%m-%dT%H:%M:%S.%f')
@@ -33,8 +41,6 @@ class BaseModel:
             if 'id' not in kwargs:
                 kwargs['id'] = str(uuid.uuid4())
 
-            if '__class__' in kwargs:
-                del kwargs['__class__']
             self.__dict__.update(kwargs)
         else:
             self.id = str(uuid.uuid4())
