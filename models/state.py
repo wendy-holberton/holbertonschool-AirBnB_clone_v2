@@ -7,7 +7,6 @@ from models.city import City
 import models
 import os
 
-
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
