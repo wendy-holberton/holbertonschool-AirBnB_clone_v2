@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Module for testing amenity """
 from tests.test_models.test_base_model import test_basemodel
-from models.console import Console
+from console import Console
 
 class test_Console(test_basemodel):
     """ Class to test the Console method """
