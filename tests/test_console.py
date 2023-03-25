@@ -1,4 +1,5 @@
 import unittest
 
 class test_console(unittest.TestCase):
-    pass
+    def test_something(self):
+        self.assertEquals(1+2,3)
