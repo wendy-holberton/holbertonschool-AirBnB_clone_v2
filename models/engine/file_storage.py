@@ -63,3 +63,7 @@ class FileStorage:
         else:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             self.__objects.pop(key, None)
+
+    def close(self):
+        """Close the database"""
+        self.reload()

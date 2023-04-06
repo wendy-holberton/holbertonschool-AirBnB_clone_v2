@@ -7,22 +7,19 @@ from models.city import City
 import models
 import os
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    if os.environ.get("HBNB_TYPE_STORAGE") == "db":
-        cities = relationship(
-            City,
-            backref="state",
-            cascade="all, delete"
-        )
-    else:
-        @property
-        def cities(self):
-            """When FileStorage is used"""
-            cities = []
+    @property
+    def cities(self):
+        """When FileStorage is used"""
+        cities = []
+        if os.environ.get("HBNB_TYPE_STORAGE") == "db":
+            return cities
+        else:
             city_records = models.storage.all(City)
             for city in city_records.values():
                 if city.state_id == self.id:

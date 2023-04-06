@@ -54,7 +54,8 @@ class DBStorage:
     def all(self, cls=None):
         dictionary = {}
         if cls:
-            modelClass = ModelDict[cls]
+            # modelClass = ModelDict[cls]
+            modelClass = cls
             self.readAllAsDict(cls, modelClass, dictionary)
         else:
             for className, modelClass in ModelDict.items():
@@ -93,3 +94,7 @@ class DBStorage:
         # session
         self.__session = scoped_session(
             sessionmaker(bind=self.__engine, expire_on_commit=False))
+
+    def close(self):
+        """Close the database"""
+        self.__session.remove()
